@@ -1,0 +1,33 @@
+:root {
+  --primary: #0d0d0d;
+  --secondary: #dfe3ee;
+}
+
+.navbar_main{
+  background-color: var(--primary) !important;
+}
+
+.logo{
+  height: 50px !important;
+}
+
+.navbar__autocomplete{
+  width: 100% !important;
+  background-color: var(--secondary) !important;
+}
+
+.cart {
+  cursor: pointer;
+}
+
+.login__btn,
+.cart__btn {
+  text-align: center;
+  color: var(--secondary) !important;
+  text-transform: none !important;
+}
+
+.login__btn:hover,
+.cart__btn:hover {
+  border: 1px solid var(--secondary) !important;
+}
