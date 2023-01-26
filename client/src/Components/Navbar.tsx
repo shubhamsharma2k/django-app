@@ -7,7 +7,7 @@ import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useStoreActions, useStoreState } from "../store/config";
 
-import logo from "../media/logo.avif";
+import wishCart from "../media/wishCart.webp";
 import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
@@ -18,14 +18,14 @@ const Navbar = () => {
       <AppBar position="static" className="navbar_main" enableColorOnDark>
         <Toolbar>
           <div className="row" style={{ width: "60%" }}>
-            <div className="col-2 text-end" onClick={() => navigate("/")}>
+            <div className="col-3 text-center" onClick={() => navigate("/")}>
               <img
-                src={logo}
+                src={wishCart}
                 className="p-0 m-0 logo__clickable"
                 alt="no_img"
               />
             </div>
-            <div className="col-8">
+            <div className="col-7">
               <Autocomplete
                 id="combo-box-demo"
                 options={["a", "b"]}

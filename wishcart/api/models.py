@@ -25,6 +25,11 @@ CATEGORY_CHOICES = (
     ('BW', "Bottom Wear"),
 )
 
+CAROUSEL_CHOICES = (
+    ('yes', 'yes'),
+    ('no', 'no')
+)
+
 
 class Product(models.Model):
     title = models.CharField(max_length=100)
@@ -32,8 +37,9 @@ class Product(models.Model):
     discount_price = models.FloatField()
     description = models.TextField(max_length=500)
     brand = models.CharField(max_length=100)
-    catergory = models.CharField(choices=CATEGORY_CHOICES, max_length=2)
+    category = models.CharField(choices=CATEGORY_CHOICES, max_length=2)
     product_image = models.ImageField(upload_to='productimg')
+    carousel = models.CharField(choices=CAROUSEL_CHOICES, max_length=3, default='no')
 
     def __str__(self):
         return str(self.title)

@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 import { useStoreActions, useStoreState } from "../store/config";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 
 const Home = () => {
   const { products } = useStoreState((state) => state.home);
@@ -14,16 +16,26 @@ const Home = () => {
   }
 
   return (
-    <div>
-      {products.length > 0 ? (
-        <div>
-          {products.map((product,index) => (
-            <li key={index}>{product.title}</li>
-          ))}
-        </div>
-      ) : (
-        ""
-      )}
+    <div className="home">
+      <div className="container">
+        {products.length > 0 ? (
+          <div>
+            <Carousel>
+              {products
+                .filter((product) => product.carousel === "yes")
+                .map((product, index) => (
+                  <div key={index}>
+                    <img
+                      src={`http://127.0.0.1:8000${product.product_image}`}
+                    />
+                  </div>
+                ))}
+            </Carousel>
+          </div>
+        ) : (
+          ""
+        )}
+      </div>
     </div>
   );
 };

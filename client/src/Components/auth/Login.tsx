@@ -1,8 +1,8 @@
 import { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import { Button } from "@mui/material";
-import logo from "../../media/logo.avif";
+import { Button, Divider } from "@mui/material";
+import wishCart from "../../media/wishCart.webp";
 
 import { useStoreActions, useStoreState } from "../../store/config";
 import { useNavigate } from "react-router-dom";
@@ -20,8 +20,7 @@ const Login = () => {
   return (
     <div className="text-center login__container pt-4">
       <div className="mb-4">
-        <img src={logo} className="logo__nonClickable" alt="no_img" />
-        <Typography variant="caption"> WishCart.in</Typography>
+        <img src={wishCart} className="logo__nonClickable" alt="no_img" />
       </div>
       <div className="login__form">
         <div>
@@ -71,9 +70,9 @@ const Login = () => {
           Login
         </Button>
       </div>
-      <Typography variant="subtitle2" className="mb-2">
-        New to WishCart?
-      </Typography>
+      <Divider style={{ width: "50%" }} className="mx-auto mb-2">
+        <Typography variant="subtitle2">New to WishCart?</Typography>
+      </Divider>
       <Button
         className="btn__secondary"
         size="small"
@@ -81,7 +80,6 @@ const Login = () => {
       >
         Create your WishCart account
       </Button>
-      <hr className="mx-auto" style={{ width: "80%" }} />
     </div>
   );
 };
