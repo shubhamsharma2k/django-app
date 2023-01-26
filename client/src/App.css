@@ -3,15 +3,20 @@
   --secondary: #dfe3ee;
 }
 
-.navbar_main{
+.navbar_main {
   background-color: var(--primary) !important;
 }
 
-.logo{
+.logo__clickable {
+  height: 50px !important;
+  cursor: pointer;
+}
+
+.logo__nonClickable {
   height: 50px !important;
 }
 
-.navbar__autocomplete{
+.navbar__autocomplete {
   width: 100% !important;
   background-color: var(--secondary) !important;
 }
@@ -30,4 +35,25 @@
 .login__btn:hover,
 .cart__btn:hover {
   border: 1px solid var(--secondary) !important;
+}
+
+.login__form {
+  display: inline-block !important;
+  padding: 30px 50px 30px 50px;
+  width: 30% !important;
+  text-align: start !important;
+}
+
+.login__textFields {
+  width: 100% !important;
+}
+
+.btn__primary {
+  color: var(--secondary) !important;
+  background-color: var(--primary) !important;
+}
+
+.btn__secondary {
+  color: var(--primary) !important;
+  background-color: var(--secondary) !important;
 }

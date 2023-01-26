@@ -7,20 +7,23 @@ import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useStoreActions, useStoreState } from "../store/config";
 
-import asd from "../media/asd.avif";
-import Login from "./auth/Login";
+import logo from "../media/logo.avif";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
-  const { loginModal } = useStoreState((state) => state.auth);
-  const { setLoginModal } = useStoreActions((action) => action.auth);
+  const navigate = useNavigate();
 
   return (
     <Box>
       <AppBar position="static" className="navbar_main" enableColorOnDark>
         <Toolbar>
           <div className="row" style={{ width: "60%" }}>
-            <div className="col-2 text-end">
-              <img src={asd} className="p-0 m-0 logo" alt="no_img" />
+            <div className="col-2 text-end" onClick={() => navigate("/")}>
+              <img
+                src={logo}
+                className="p-0 m-0 logo__clickable"
+                alt="no_img"
+              />
             </div>
             <div className="col-8">
               <Autocomplete
@@ -35,19 +38,15 @@ const Navbar = () => {
           </div>
           <Button
             className=" col-1 login__btn"
-            onClick={() => setLoginModal(true)}
+            onClick={() => navigate("/login")}
           >
             Login
           </Button>
-          <Button
-            className=" col-1 cart__btn"
-            onClick={() => console.log("asd")}
-          >
+          <Button className=" col-1 cart__btn" onClick={() => navigate("/")}>
             <FontAwesomeIcon icon={faCartShopping} /> &nbsp; Cart
           </Button>
         </Toolbar>
       </AppBar>
-      <Login />
     </Box>
   );
 };
