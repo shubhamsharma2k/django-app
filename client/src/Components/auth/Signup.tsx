@@ -7,15 +7,24 @@ import InfoIcon from "@mui/icons-material/Info";
 import { useStoreActions, useStoreState } from "../../store/config";
 import { useNavigate } from "react-router-dom";
 import Link from "@mui/material/Link";
+import Alert from "@mui/material/Alert";
 
 const Signup = () => {
   const navigate = useNavigate();
   const [formValue, setFormValue] = useState({
+    username: "",
     email: "",
     password: "",
   });
 
-  function handleLogin() {}
+  function handleSignup() {
+    const payload = {
+      username: formValue.username,
+      email: formValue.email,
+      password: formValue.password,
+    };
+    console.log(payload);
+  }
 
   return (
     <div className="text-center login__container pt-4">
@@ -29,13 +38,24 @@ const Signup = () => {
           </Typography>
         </div>
         <div className="mb-2">
-          <Typography variant="subtitle2">Your name</Typography>
+          <Typography variant="subtitle2">Username</Typography>
           <TextField
             id="outlined-basic"
             variant="outlined"
             style={{ width: "100%" }}
             size="small"
-            placeholder="First and last name"
+            onChange={(e) =>
+              setFormValue({ ...formValue, username: e.target.value })
+            }
+          />
+        </div>
+        <div className="mb-2">
+          <Typography variant="subtitle2">Email</Typography>
+          <TextField
+            id="outlined-basic"
+            variant="outlined"
+            style={{ width: "100%" }}
+            size="small"
             onChange={(e) =>
               setFormValue({ ...formValue, email: e.target.value })
             }
@@ -63,7 +83,7 @@ const Signup = () => {
           variant="contained"
           className="btn__primary w-100"
           size="small"
-          onClick={handleLogin}
+          onClick={handleSignup}
         >
           Continue
         </Button>

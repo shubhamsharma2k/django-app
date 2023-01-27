@@ -8,12 +8,12 @@
 }
 
 .logo__clickable {
-  height: 50px !important;
+  height: 30px !important;
   cursor: pointer;
 }
 
 .logo__nonClickable {
-  height: 50px !important;
+  height: 30px !important;
 }
 
 .navbar__autocomplete {

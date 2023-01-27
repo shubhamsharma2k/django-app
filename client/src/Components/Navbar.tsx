@@ -31,7 +31,11 @@ const Navbar = () => {
                 options={["a", "b"]}
                 className="navbar__autocomplete"
                 renderInput={(params) => (
-                  <TextField {...params} placeholder="Search for products..." />
+                  <TextField
+                    {...params}
+                    placeholder="Search for products..."
+                    size="small"
+                  />
                 )}
               />
             </div>

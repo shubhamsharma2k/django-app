@@ -39,7 +39,8 @@ class Product(models.Model):
     brand = models.CharField(max_length=100)
     category = models.CharField(choices=CATEGORY_CHOICES, max_length=2)
     product_image = models.ImageField(upload_to='productimg')
-    carousel = models.CharField(choices=CAROUSEL_CHOICES, max_length=3, default='no')
+    carousel = models.CharField(
+        choices=CAROUSEL_CHOICES, max_length=3, default='no')
 
     def __str__(self):
         return str(self.title)

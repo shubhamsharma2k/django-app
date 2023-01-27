@@ -17,10 +17,10 @@ const Home = () => {
 
   return (
     <div className="home">
-      <div className="container">
+      <div className="mx-auto" style={{ width: "90%" }}>
         {products.length > 0 ? (
           <div>
-            <Carousel>
+            <Carousel infiniteLoop showThumbs={false}>
               {products
                 .filter((product) => product.carousel === "yes")
                 .map((product, index) => (
