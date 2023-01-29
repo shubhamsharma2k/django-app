@@ -15,7 +15,18 @@ const Login = () => {
     password: "",
   });
 
-  function handleLogin() {}
+  const { login } = useStoreActions((action) => action.auth);
+
+  async function handleLogin() {
+    const payload = {
+      email: formValue.email,
+      password: formValue.password,
+    };
+    const rsp = await login(payload);
+    if (rsp.status === 200) {
+      navigate("/");
+    }
+  }
 
   return (
     <div className="text-center login__container pt-4">

@@ -5,6 +5,7 @@ import { home } from "./models/home";
 import { auth } from "./models/auth";
 
 import { HomeService } from "../services/homeService";
+import { AuthService } from "../services/authService";
 
 const typedHooks = createTypedHooks<StoreModel>();
 export const useStoreActions = typedHooks.useStoreActions;
@@ -12,7 +13,7 @@ export const useStoreState = typedHooks.useStoreState;
 
 export const storeModel: StoreModel = {
   home,
-  auth
+  auth,
 };
 
 export const store = createStore(storeModel, {
@@ -20,5 +21,6 @@ export const store = createStore(storeModel, {
   name: "devsearch-ui",
   injections: {
     homeService: new HomeService(),
+    authService: new AuthService(),
   },
 });

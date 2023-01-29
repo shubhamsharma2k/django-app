@@ -12,18 +12,23 @@ import Alert from "@mui/material/Alert";
 const Signup = () => {
   const navigate = useNavigate();
   const [formValue, setFormValue] = useState({
-    username: "",
+    name: "",
     email: "",
     password: "",
   });
 
-  function handleSignup() {
+  const { register } = useStoreActions((action) => action.auth);
+
+  async function handleSignup() {
     const payload = {
-      username: formValue.username,
+      name: formValue.name,
       email: formValue.email,
       password: formValue.password,
     };
-    console.log(payload);
+    const rsp = await register(payload);
+    if (rsp.status === 201) {
+      navigate("/login");
+    }
   }
 
   return (
@@ -38,14 +43,14 @@ const Signup = () => {
           </Typography>
         </div>
         <div className="mb-2">
-          <Typography variant="subtitle2">Username</Typography>
+          <Typography variant="subtitle2">Name</Typography>
           <TextField
             id="outlined-basic"
             variant="outlined"
             style={{ width: "100%" }}
             size="small"
             onChange={(e) =>
-              setFormValue({ ...formValue, username: e.target.value })
+              setFormValue({ ...formValue, name: e.target.value })
             }
           />
         </div>

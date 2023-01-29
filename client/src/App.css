@@ -8,8 +8,8 @@
 }
 
 .logo__clickable {
-  height: 30px !important;
-  cursor: pointer;
+  height: 25px !important;
+  cursor: pointer !important;
 }
 
 .logo__nonClickable {
@@ -26,7 +26,8 @@
 }
 
 .login__btn,
-.cart__btn {
+.cart__btn,
+.address__btn {
   text-align: center;
   color: var(--secondary) !important;
   text-transform: none !important;
@@ -58,6 +59,6 @@
   background-color: var(--secondary) !important;
 }
 
-.home{
+.home {
   margin-top: 100px;
 }

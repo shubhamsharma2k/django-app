@@ -4,6 +4,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import Product, User
 from .serializers import ProductSerializer, UserSerializer
+from django.contrib.auth.hashers import make_password, check_password
+import json
 
 
 @api_view(['GET'])
@@ -21,11 +23,30 @@ def users(request):
 
 
 @api_view(['POST'])
+def login(request):
+    data = request.data
+    authenticated = {
+        "isAuthenticated": False,
+        "name": "",
+        "email": "",
+    }
+    user = User.objects.get(pk=data['email'])
+    checkPassword = check_password(data['password'], user.password)
+    if checkPassword is True:
+        authenticated['isAuthenticated'] = True
+        authenticated['name'] = user.name
+        authenticated['email'] = user.email
+        return Response(authenticated, status.HTTP_200_OK)
+    return Response({"message": "Incorrect email or password!"}, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST'])
 def register(request):
-    serializer = UserSerializer(data=request.data)
+    data = request.data
+    data['password'] = make_password(
+        data['password'])
+    serializer = UserSerializer(data=data)
     if serializer.is_valid():
-        instance = serializer.save()
-        instance.set_password(instance.password)
-        instance.save()
-        return Response(status=status.HTTP_201_CREATED)
-    return Response(serializer.errors)
+        serializer.save()
+        return Response({"status": status.HTTP_201_CREATED}, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status.HTTP_409_CONFLICT)
