@@ -1,8 +1,16 @@
-import * as React from "react";
+import React, { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import { Autocomplete, Button, TextField, Typography } from "@mui/material";
+import {
+  Autocomplete,
+  Button,
+  Divider,
+  Link,
+  Popover,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useStoreActions, useStoreState } from "../store/config";
@@ -12,9 +20,16 @@ import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
   const { user } = useStoreState((action) => action.auth);
 
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popover" : undefined;
   return (
     <Box>
       <AppBar position="static" className="navbar_main" enableColorOnDark>
@@ -49,16 +64,17 @@ const Navbar = () => {
             {user.isAuthenticated ? (
               <Button
                 className="col-2 login__btn "
-                onClick={() => navigate("/login")}
+                onClick={() => navigate("/account")}
               >
-                Hello, {user.name.split(" ")[0]} view Account
+                Hello {user.name.split(" ")[0]}, view Account
               </Button>
             ) : (
               <Button
                 className="col-1 login__btn "
-                onClick={() => navigate("/login")}
+                aria-describedby={id}
+                onClick={handleClick}
               >
-                Login
+                Login/Signup
               </Button>
             )}
 
@@ -66,6 +82,41 @@ const Navbar = () => {
               <FontAwesomeIcon icon={faCartShopping} /> &nbsp; Cart
             </Button>
           </div>
+          <Popover
+            id={id}
+            open={open}
+            anchorEl={anchorEl}
+            onClose={() => setAnchorEl(null)}
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "left",
+            }}
+          >
+            <div className="d-flex flex-column text-center">
+              <Button
+                onClick={() => {
+                  setAnchorEl(null);
+                  navigate("/login");
+                }}
+                className="popover__loginBtn"
+              >
+                Login
+              </Button>
+              <Typography className="m-3" variant="caption">
+                New Customer?{" "}
+                <Link
+                  className="text-decoration-none"
+                  onClick={() => {
+                    setAnchorEl(null);
+                    navigate("/signup");
+                  }}
+                >
+                  Signup
+                </Link>
+                {/* <hr style={{ width: "90%" }} className="mx-auto mt-2 mb-0" /> */}
+              </Typography>
+            </div>
+          </Popover>
         </Toolbar>
       </AppBar>
     </Box>

@@ -33,6 +33,19 @@
   text-transform: none !important;
 }
 
+.popover__loginBtn {
+  border: 1px solid red;
+  margin-top: 15px !important;
+  margin-left: 15px !important;
+  margin-right: 15px !important;
+  background-color: #f3cf72 !important;
+  color: var(--primary) !important;
+}
+
+.popover__loginBtn:hover {
+  background-color: #f8cb58 !important;
+}
+
 .login__btn:hover,
 .cart__btn:hover {
   border: 1px solid var(--secondary) !important;

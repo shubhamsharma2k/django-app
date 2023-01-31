@@ -61,6 +61,8 @@ export const auth: AuthModel = {
     });
 
     if (rsp.status === 200) {
+      const token = rsp.data.token;
+      sessionStorage.setItem("token", token);
       actions.setUser(rsp.data);
     }
     actions.setLoading(false);
