@@ -7,7 +7,6 @@ import InfoIcon from "@mui/icons-material/Info";
 import { useStoreActions, useStoreState } from "../../store/config";
 import { useNavigate } from "react-router-dom";
 import Link from "@mui/material/Link";
-import Alert from "@mui/material/Alert";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -20,14 +19,19 @@ const Signup = () => {
   const { register } = useStoreActions((action) => action.auth);
 
   async function handleSignup() {
-    const payload = {
-      name: formValue.name,
-      email: formValue.email,
-      password: formValue.password,
-    };
-    const rsp = await register(payload);
-    if (rsp.status === 201) {
-      navigate("/login");
+    if (
+      !formValue.email.match(new RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$"))
+    ) {
+    } else {
+      const payload = {
+        name: formValue.name,
+        email: formValue.email,
+        password: formValue.password,
+      };
+      const rsp = await register(payload);
+      if (rsp.status === 201) {
+        navigate("/login");
+      }
     }
   }
 
@@ -69,6 +73,7 @@ const Signup = () => {
         <div className="mb-3">
           <Typography variant="subtitle2">Password</Typography>
           <TextField
+            type="password"
             id="outlined-basic"
             variant="outlined"
             size="small"

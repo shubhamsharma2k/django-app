@@ -1,6 +1,7 @@
 :root {
   --primary: #0d0d0d;
   --secondary: #dfe3ee;
+  --onHover:  #eee;
 }
 
 .navbar_main {
@@ -74,4 +75,20 @@
 
 .home {
   margin-top: 100px;
+}
+
+.account__tiles{
+  display: grid;
+  grid-template-columns: 4fr 4fr 4fr;
+}
+
+.account__tile{
+  display: flex !important;
+  flex-wrap: wrap !important;
+  width: 400px !important;
+  margin-top: 20px !important;
+}
+
+.account__tile:hover{
+  cursor: pointer !important;
 }

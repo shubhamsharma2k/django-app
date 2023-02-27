@@ -23,10 +23,15 @@ const Navbar = () => {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
   const { user } = useStoreState((action) => action.auth);
+  const { products } = useStoreState((state) => state.home);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
+
+  function productOptions(){
+   return products.map((pr)=> pr.title) 
+  }
 
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
@@ -50,7 +55,8 @@ const Navbar = () => {
             <div className="col-6 ">
               <Autocomplete
                 id="combo-box-demo"
-                options={["a", "b"]}
+                filterOptions={(x) => x}
+                options={productOptions()}
                 className="navbar__autocomplete"
                 renderInput={(params) => (
                   <TextField
@@ -78,7 +84,10 @@ const Navbar = () => {
               </Button>
             )}
 
-            <Button className=" col-1 cart__btn " onClick={() => navigate("/")}>
+            <Button
+              className=" col-1 cart__btn "
+              onClick={() => navigate("/cart")}
+            >
               <FontAwesomeIcon icon={faCartShopping} /> &nbsp; Cart
             </Button>
           </div>
@@ -113,7 +122,6 @@ const Navbar = () => {
                 >
                   Signup
                 </Link>
-                {/* <hr style={{ width: "90%" }} className="mx-auto mt-2 mb-0" /> */}
               </Typography>
             </div>
           </Popover>

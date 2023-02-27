@@ -3,6 +3,7 @@ import { createStore, createTypedHooks } from "easy-peasy";
 import { StoreModel } from "./model";
 import { home } from "./models/home";
 import { auth } from "./models/auth";
+import { misc } from "./models/misc";
 
 import { HomeService } from "../services/homeService";
 import { AuthService } from "../services/authService";
@@ -14,6 +15,7 @@ export const useStoreState = typedHooks.useStoreState;
 export const storeModel: StoreModel = {
   home,
   auth,
+  misc
 };
 
 export const store = createStore(storeModel, {

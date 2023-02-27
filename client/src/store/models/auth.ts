@@ -61,8 +61,12 @@ export const auth: AuthModel = {
     });
 
     if (rsp.status === 200) {
-      const token = rsp.data.token;
-      sessionStorage.setItem("token", token);
+      const tokenResponse = await authService.accessToken({
+        email: payload.email,
+        password: payload.password,
+      });
+      const accessToken = tokenResponse.data.access;
+      localStorage.setItem("access_token", accessToken);
       actions.setUser(rsp.data);
     }
     actions.setLoading(false);

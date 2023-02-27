@@ -1,14 +1,16 @@
 import React, { useEffect } from "react";
 import { useStoreActions, useStoreState } from "../store/config";
-import { Carousel } from "react-responsive-carousel";
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import Products from "./products/Products";
 
 const Home = () => {
-  const { products } = useStoreState((state) => state.home);
   const { getProducts } = useStoreActions((state) => state.home);
 
   useEffect(() => {
-    handleGetProducts();
+    if (localStorage.getItem("access_token") === null) {
+      window.location.href = "/login";
+    } else {
+      handleGetProducts();
+    }
   }, []);
 
   async function handleGetProducts() {
@@ -18,23 +20,7 @@ const Home = () => {
   return (
     <div className="home">
       <div className="mx-auto" style={{ width: "90%" }}>
-        {products.length > 0 ? (
-          <div>
-            <Carousel infiniteLoop showThumbs={false}>
-              {products
-                .filter((product) => product.carousel === "yes")
-                .map((product, index) => (
-                  <div key={index}>
-                    <img
-                      src={`http://127.0.0.1:8000${product.product_image}`}
-                    />
-                  </div>
-                ))}
-            </Carousel>
-          </div>
-        ) : (
-          ""
-        )}
+        <Products/>
       </div>
     </div>
   );

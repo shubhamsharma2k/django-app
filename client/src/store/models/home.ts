@@ -1,4 +1,5 @@
 import { Action, action, Thunk, thunk } from "easy-peasy";
+import { store } from "../config";
 
 export interface HomeModel {
   products: any[];
@@ -19,6 +20,11 @@ export const home: HomeModel = {
 
       if (rsp.status === 200) {
         actions.setProducts(rsp.data);
+      } else if (rsp.status === 401) {
+        store.getActions().auth.setUser({
+          ...store.getState().auth.user,
+          isAuthenticated: false,
+        });
       }
       return rsp;
     }
