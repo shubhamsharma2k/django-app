@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import  Users,RegisterUser, Products, LoginUser
+from .views import Users, RegisterUser, Products, LoginUser, Orders, getOrder
 
 
 urlpatterns = [
@@ -7,4 +7,6 @@ urlpatterns = [
     path('users/', Users.as_view(), name='getUsers'),
     path('login/', LoginUser.as_view(), name='userlogin'),
     path('register/', RegisterUser.as_view(), name='userRegister'),
+    path('orders/', Orders.as_view(), name='getOrders'),
+    path('order/<str:pk>', getOrder.as_view(), name='getOrder'),
 ]

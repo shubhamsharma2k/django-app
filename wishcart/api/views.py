@@ -1,5 +1,5 @@
-from .models import CustomUser, Product
-from .serializers import UserSerializer, ProductSerializer
+from .models import CustomUser, Product, Order
+from .serializers import UserSerializer, ProductSerializer, OrderSerializer
 from django.contrib.auth.hashers import check_password
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.views import APIView
@@ -49,3 +49,18 @@ class RegisterUser(APIView):
                 email=data['email'], password=data['password'], extra_fields=data)
             return Response({"status": status.HTTP_201_CREATED}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status.HTTP_409_CONFLICT)
+
+
+class Orders(APIView):
+    def get(self, request):
+        orders = Order.objects.all()
+        serializer = OrderSerializer(orders, many=True)
+        return Response(serializer.data)
+
+
+class getOrder(APIView):
+    def get(self,request, pk):
+        user = CustomUser.objects.get(id=pk)
+        order = Order.objects.get(user=user)
+        serializer = OrderSerializer(order)
+        return Response(serializer.data)

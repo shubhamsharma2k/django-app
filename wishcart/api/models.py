@@ -7,12 +7,12 @@ state_choices = (("Andhra Pradesh", "Andhra Pradesh"), ("Arunachal Pradesh ", "A
 
 
 class CustomUser(AbstractUser):
-    username=None
+    username = None
     email = models.EmailField(unique=True, max_length=200, null=True)
     name = models.CharField(max_length=100, blank=True)
 
-    USERNAME_FIELD='email'
-    REQUIRED_FIELDS=[]
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
 
     objects = UserManager()
 
@@ -20,10 +20,10 @@ class CustomUser(AbstractUser):
         return str(self.name + ", " + self.email)
 
 
-class Customer(models.Model):
+class Profile(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
-    locality = models.CharField(max_length=200)
+    residence = models.CharField(max_length=200)
     city = models.CharField(max_length=50)
     zipcode = models.IntegerField()
     state = models.CharField(choices=state_choices, max_length=50)
@@ -81,9 +81,13 @@ STATUS_CHOICES = (
 
 class Order(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    # profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
     created = models.DateTimeField(auto_now_add=True)
     status = models.CharField(
         max_length=50, choices=STATUS_CHOICES, default='Pending')
+
+
+    def __str__(self):
+        return str(self.user.name)
