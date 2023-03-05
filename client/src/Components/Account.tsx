@@ -3,6 +3,8 @@ import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
 import BoxImg from "../media/Box.png";
+import signInLock from "../media/signInLock.png";
+import address from "../media/address.png";
 
 const Account = () => {
   return (
@@ -22,11 +24,13 @@ const Account = () => {
             <Paper variant="outlined" sx={{ padding: "10px" }}>
               <div className="row">
                 <div className="col-4">
-                  <img src={BoxImg} />
+                  <img src={BoxImg} style={{ height: "70px" }} />
                 </div>
                 <div className="col-8">
-                  <Typography variant="h6">Your Orders</Typography>
-                  <Typography>Track, return, or buy things again</Typography>
+                  <Typography variant="subtitle2">Your Orders</Typography>
+                  <Typography variant="body2">
+                    Track, return, or buy things again
+                  </Typography>
                 </div>
               </div>
             </Paper>
@@ -40,14 +44,16 @@ const Account = () => {
               },
             }}
           >
-            <Paper  variant="outlined" sx={{ padding: "10px" }}>
+            <Paper variant="outlined" sx={{ padding: "10px" }}>
               <div className="row">
                 <div className="col-4">
-                  <img src={BoxImg} />
+                  <img src={signInLock} style={{ height: "70px" }} />
                 </div>
                 <div className="col-8">
-                  <Typography variant="h6">Login & security</Typography>
-                  <Typography>Edit login, and mobile number</Typography>
+                  <Typography variant="subtitle2">Login & security</Typography>
+                  <Typography variant="body2">
+                    Edit login, name and mobile number
+                  </Typography>
                 </div>
               </div>
             </Paper>
@@ -61,14 +67,16 @@ const Account = () => {
               },
             }}
           >
-            <Paper  variant="outlined" sx={{ padding: "10px" }}>
+            <Paper variant="outlined" sx={{ padding: "10px" }}>
               <div className="row">
                 <div className="col-4">
-                  <img src={BoxImg} />
+                  <img src={address} style={{ height: "70px" }} />
                 </div>
                 <div className="col-8">
-                  <Typography variant="h6">Your Addresses</Typography>
-                  <Typography>Edit addresses for orders and gifts</Typography>
+                  <Typography variant="subtitle2">Your Addresses</Typography>
+                  <Typography variant="body2">
+                    Edit addresses for orders and gifts
+                  </Typography>
                 </div>
               </div>
             </Paper>

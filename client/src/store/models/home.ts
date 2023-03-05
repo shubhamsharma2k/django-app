@@ -29,4 +29,5 @@ export const home: HomeModel = {
       return rsp;
     }
   ),
+
 };

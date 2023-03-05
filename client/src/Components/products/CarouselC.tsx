@@ -5,7 +5,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 const CarouselC = () => {
   return (
     <div>
-      <Carousel infiniteLoop showThumbs={false}></Carousel>
+      <Carousel infiniteLoop showThumbs={false}/>
     </div>
   );
 };

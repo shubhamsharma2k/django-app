@@ -19,6 +19,7 @@ import wishCart from "../media/wishCart.webp";
 import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const [inputValue, setInputValue] = useState<any>("");
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
@@ -29,8 +30,10 @@ const Navbar = () => {
     setAnchorEl(event.currentTarget);
   };
 
-  function productOptions(){
-   return products.map((pr)=> pr.title) 
+  function productOptions() {
+    return products
+      .map((pr) => pr.title)
+      .filter((p) => p.toLowerCase().includes(inputValue.toLowerCase()));
   }
 
   const open = Boolean(anchorEl);
@@ -54,10 +57,11 @@ const Navbar = () => {
             )}
             <div className="col-6 ">
               <Autocomplete
+                autoComplete
                 id="combo-box-demo"
-                filterOptions={(x) => x}
                 options={productOptions()}
                 className="navbar__autocomplete"
+                open={inputValue.length > 2}
                 renderInput={(params) => (
                   <TextField
                     {...params}
