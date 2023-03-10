@@ -23,7 +23,7 @@ const Login = () => {
       !formValue.email.match(new RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$")) ||
       formValue.password === ""
     ) {
-      console.log('incorrect email or password')
+      console.log("incorrect email or password");
     } else {
       const payload = {
         email: formValue.email,

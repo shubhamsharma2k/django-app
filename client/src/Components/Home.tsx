@@ -6,7 +6,7 @@ const Home = () => {
   const { getProducts } = useStoreActions((state) => state.home);
 
   useEffect(() => {
-    if (localStorage.getItem("access_token") === null) {
+    if (localStorage.getItem("token") === null) {
       window.location.href = "/login";
     } else {
       handleGetProducts();

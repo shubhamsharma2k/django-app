@@ -28,7 +28,8 @@
 
 .login__btn,
 .cart__btn,
-.address__btn {
+.address__btn,
+.logout__btn {
   text-align: center;
   color: var(--secondary) !important;
   text-transform: none !important;
@@ -48,7 +49,8 @@
 }
 
 .login__btn:hover,
-.cart__btn:hover {
+.cart__btn:hover,
+.logout__btn:hover {
   border: 1px solid var(--secondary) !important;
 }
 

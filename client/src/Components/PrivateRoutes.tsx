@@ -15,8 +15,8 @@ const PrivateRoutes = () => {
   }
 
   function isValidToken() {
-    if (localStorage.getItem("access_token")) {
-      const decodedJwt = parseJwt(localStorage.getItem("access_token"));
+    if (localStorage.getItem("token")) {
+      const decodedJwt = parseJwt(localStorage.getItem("token"));
 
       if (decodedJwt.exp * 1000 < Date.now()) {
         return false;
