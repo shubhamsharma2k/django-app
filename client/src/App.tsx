@@ -17,6 +17,24 @@ import PrivateRoutes from "./Components/PrivateRoutes";
 import Cart from "./Components/Cart";
 
 function App() {
+  const token = localStorage.getItem("token");
+  if (token) {
+    const decodedJwt = JSON.parse(atob(token.split(".")[1]));
+    if (decodedJwt.exp * 1000 < Date.now()) {
+      store.getActions().auth.setUser({
+        isAuthenticated: false,
+        email: "",
+        name: "",
+      });
+    } else {
+      const user: any = localStorage.getItem("user");
+      const parsedUser = JSON.parse(user);
+      if (parsedUser) {
+        store.getActions().auth.setUser(parsedUser);
+      }
+    }
+  }
+
   return (
     <StoreProvider store={store}>
       <Router>

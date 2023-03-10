@@ -66,7 +66,8 @@ export const auth: AuthModel = {
         password: payload.password,
       });
       const accessToken = tokenResponse.data.access;
-      localStorage.setItem("access_token", accessToken);
+      localStorage.setItem("token", accessToken);
+      localStorage.setItem("user", JSON.stringify(rsp.data));
       actions.setUser(rsp.data);
     }
     actions.setLoading(false);

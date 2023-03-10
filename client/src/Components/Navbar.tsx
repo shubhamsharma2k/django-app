@@ -25,6 +25,7 @@ const Navbar = () => {
 
   const { user } = useStoreState((action) => action.auth);
   const { products } = useStoreState((state) => state.home);
+  const { setUser } = useStoreActions((action) => action.auth);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -55,7 +56,7 @@ const Navbar = () => {
                 {user.name}
               </Typography>
             )}
-            <div className="col-6 ">
+            <div className="col-5 ">
               <Autocomplete
                 autoComplete
                 id="combo-box-demo"
@@ -88,12 +89,30 @@ const Navbar = () => {
               </Button>
             )}
 
-            <Button
-              className=" col-1 cart__btn "
-              onClick={() => navigate("/cart")}
-            >
-              <FontAwesomeIcon icon={faCartShopping} /> &nbsp; Cart
-            </Button>
+            {user.isAuthenticated && (
+              <>
+                <Button
+                  className=" col-1 cart__btn "
+                  onClick={() => navigate("/cart")}
+                >
+                  <FontAwesomeIcon icon={faCartShopping} /> &nbsp; Cart
+                </Button>
+                <Button
+                  className=" col-1 logout__btn"
+                  onClick={() => {
+                    setUser({
+                      isAuthenticated: false,
+                      email: "",
+                      name: "",
+                    });
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("user");
+                  }}
+                >
+                  Logout
+                </Button>{" "}
+              </>
+            )}
           </div>
           <Popover
             id={id}
