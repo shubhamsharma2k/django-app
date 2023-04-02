@@ -1,6 +1,6 @@
 import React from "react";
 import { useStoreState } from "../../store/config";
-import ProductItem from "./ProductItem";
+import ProductItem from "./ProductListItem";
 import CarouselC from "./CarouselC";
 
 const Products = () => {
