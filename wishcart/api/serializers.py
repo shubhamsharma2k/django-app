@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import Product, Order, Profile
-from django.contrib.auth import (get_user_model, authenticate)
+from django.contrib.auth import (get_user_model)
 from django.utils.translation import gettext as _
 
 
