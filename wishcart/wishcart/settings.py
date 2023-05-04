@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'api.apps.ApiConfig',
+    'api',
     'rest_framework',
     'corsheaders',
     'rest_framework_simplejwt'
@@ -137,4 +137,4 @@ REST_FRAMEWORK = {
     )
 }
 
-AUTH_USER_MODEL = 'api.CustomUser'
+AUTH_USER_MODEL = 'api.User'
