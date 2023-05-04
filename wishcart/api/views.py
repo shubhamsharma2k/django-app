@@ -14,6 +14,8 @@ from rest_framework import status
 
 
 # Users API views
+
+# Get user details with profile.
 class Users(APIView):
     def get(self, request):
         users = User.objects.filter(is_superuser=False, is_staff=False)
@@ -25,6 +27,7 @@ class CreateUserView(generics.CreateAPIView):
     serializer_class = UserSerializer
 
 
+# login and authenticate user and provide details and profile.
 class LoginUser(APIView):
     def post(self, request):
         data = request.data

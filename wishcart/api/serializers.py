@@ -7,19 +7,20 @@ from django.utils.translation import gettext as _
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = '__all__'
+        fields = ['user', 'name', 'residence', 'city', 'zipcode', 'state']
 
 
 class UserSerializer(serializers.ModelSerializer):
     profile = ProfileSerializer(read_only=True)
+
     class Meta:
         model = get_user_model()
-        fields = ['id','email', 'password', 'name','profile']
+        fields = ['email', 'password', 'name', 'profile']
 
     def create(self, validated_data):
         return get_user_model().objects.create_user(**validated_data)
-    
-    
+
+
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
