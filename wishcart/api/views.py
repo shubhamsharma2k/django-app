@@ -16,11 +16,9 @@ from rest_framework import status
 # Users API views
 
 # Get user details with profile.
-class Users(APIView):
-    def get(self, request):
-        users = User.objects.filter(is_superuser=False, is_staff=False)
-        serializer = UserSerializer(users, many=True)
-        return Response(serializer.data)
+class Users(generics.ListAPIView):
+    serializer_class = UserSerializer
+    queryset = User.objects.all()
 
 
 class CreateUserView(generics.CreateAPIView):
@@ -35,7 +33,7 @@ class LoginUser(APIView):
             "isAuthenticated": False,
             "name": "",
             "email": "",
-            "profile": ""
+            "profile": []
         }
         user = User.objects.get(email=data['email'])
         checkPassword = check_password(data['password'], user.password)
@@ -43,8 +41,10 @@ class LoginUser(APIView):
             authenticatedData['isAuthenticated'] = True
             authenticatedData['name'] = user.name
             authenticatedData['email'] = user.email
-            profile_serializer = ProfileSerializer(user.profile)
-            authenticatedData['profile'] = profile_serializer.data
+            # Check if user has profile
+            if hasattr(user, 'profile'):
+                profile_serializer = ProfileSerializer(user.profile)
+                authenticatedData['profile'] = profile_serializer.data
             return Response(authenticatedData, status.HTTP_200_OK)
         return Response({"message": "Incorrect email or password!"}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -56,24 +56,22 @@ class ProfileCreateView(generics.CreateAPIView):
 
 
 # Products API views
-class Products(APIView):
-    def get(self, request):
-        products = Product.objects.all()
-        serializer = ProductSerializer(products, many=True)
-        return Response(serializer.data)
+class Products(generics.ListAPIView):
+    serializer_class = ProductSerializer
+    queryset = Product.objects.all()
 
 
 # Orders API views
-class Orders(APIView):
-    def get(self, request):
-        orders = Order.objects.all()
-        serializer = OrderSerializer(orders, many=True)
-        return Response(serializer.data)
+class Orders(generics.ListAPIView):
+    serializer_class = OrderSerializer
+    queryset = Order.objects.all()
 
 
-class getOrder(APIView):
-    def get(self, request, pk):
-        user = User.objects.get(id=pk)
-        order = Order.objects.get(user=user)
-        serializer = OrderSerializer(order)
-        return Response(serializer.data)
+class OrderCreateView(generics.CreateAPIView):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+
+
+class getOrder(generics.RetrieveAPIView):
+    serializer_class = OrderSerializer
+    queryset = Order.objects.all()

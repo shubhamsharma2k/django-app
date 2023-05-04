@@ -15,7 +15,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = get_user_model()
-        fields = ['email', 'password', 'name', 'profile']
+        fields = ['id', 'email', 'password', 'name', 'profile']
 
     def create(self, validated_data):
         return get_user_model().objects.create_user(**validated_data)
@@ -28,10 +28,6 @@ class ProductSerializer(serializers.ModelSerializer):
 
 
 class OrderSerializer(serializers.ModelSerializer):
-    profile = ProfileSerializer(read_only=True)
-    user = UserSerializer(read_only=True)
-    product = ProductSerializer(read_only=True)
-
     class Meta:
         model = Order
         fields = '__all__'
