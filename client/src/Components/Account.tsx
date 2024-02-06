@@ -7,6 +7,7 @@ import signInLock from "../media/signInLock.png";
 import address from "../media/address.png";
 
 const Account = () => {
+  console.log('test')
   return (
     <div className="container">
       <Typography variant="h5" className="mt-4">
